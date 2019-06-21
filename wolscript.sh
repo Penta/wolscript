@@ -1,10 +1,10 @@
-﻿#!/bin/bash
+#! /bin/bash
 
 ################################################################################
 #                                wolscript.sh                                  #
 ################################################################################
 #                                                                              #
-# Ce script permet de reveiller une salle en se baseant sur le contenu du      #
+# Ce script permet de réveiller une salle en se baseant sur le contenu du      #
 # fichier wakeup.csv (par defaut) et sur la technologie Wake on LAN.           #
 #                                                                              #
 # Installez ce script dans le dossier /wol/ (ou alors changez l'emplacement    #
@@ -22,6 +22,11 @@
 #  https://raw.githubusercontent.com/jpoliv/wakeonlan/master/wakeonlan         #
 # (Vous devez mettre l'exécutable dans le même répertoire que le script)       #
 #                                                                              #
+# Si nslookup n'est pas présent sur votre machine, vous pouvez aussi installer #
+# le paquet dnsutils via la commande suivante pour pouvoir récuperer l'adresse #
+# MAC d'une machine à partir de son nom de domaine :                           #
+#  - apt-get install dnsutils                                                  #
+#                                                                              # 
 # Le script peut reconnaitre automatiquement les adresses MAC separée soit     #
 # par un double-points, soit par un tiret (celui sera transformé en            #
 # double-points pour le traitement via wakeonlan).                             #
@@ -64,7 +69,7 @@
 #                                                                              #
 #                                                                              #
 #                                                                              #
-#               Par Andy Esnard - Décembre 2017 (rev 1.1.1)                    #
+#               Par Andy Esnard - Juin 2019 (rev 1.1.2)                        #
 #                                                                              #
 ################################################################################
 
@@ -191,8 +196,8 @@ charger_csv () {
 		while IFS=';' read salle horaire null
 		do
 			# On calcule l'heure lisible a partir du total de minute
-			heure=$(echo $(($horaire/60)))
-			minute=$(echo $(($horaire%60)))
+			heure=$((horaire / 60))
+			minute=$((horaire % 60))
 
 			# Si les minutes sont en dessous de 10, on rajoute un zéro devant
 			if [ $minute -lt 10 ]
@@ -262,7 +267,7 @@ menu () {
 			3) nouveau ;;
 
 			4)  clear; less $fichierlog ;;
-			44) clear; tail -f $fichierlog ;;
+			44) clear; tail -n 40 -f $fichierlog ;;
 
 			5) logger "[INFO] Relance manuelle de la commande des horaires"; $commande_externe ;;
 			6) conversion ;;
@@ -854,7 +859,7 @@ then
 		# On regarde si il y a des salles a réveiller
 		while [ $i -lt $nb ]
 		do
-			if [ $(($tempsminute + $delai)) -ge ${tabhoraire[$i]} ] && [ $tempsminute -le ${tabhoraire[$i]} ]
+			if [ "$(($tempsminute + $delai))" -ge ${tabhoraire[$i]} ] && [ "$tempsminute" -le ${tabhoraire[$i]} ]
 			then
 				# On récupère les salles à réveiller
 				resultat[j]=${tabsalle[$i]}
@@ -890,7 +895,7 @@ then
 						# On affiche le résultat qu'une fois dans les logs
 						if [ $i -lt 1 ]
 						then
-							$wol -f "script/${resultat[i]}.wol" 2> /dev/null | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}' | sed -e "s/^/[$(echo $(date +"%x %X")| sed "s/\//\\\\\//g")] [DEBUG] Reveil de /g" >> $fichierlog
+							$wol -f "script/${resultat[i]}.wol" 2> /dev/null | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}' | sed -e "s/^/[$(echo $(date +"%x %X")| sed "s/\//\\\\\//g")] [DEBUG] Réveil de /g" >> $fichierlog
 						else
 							$wol -f "script/${resultat[i]}.wol" > /dev/null 2>&1
 						fi
