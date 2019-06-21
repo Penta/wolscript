@@ -43,8 +43,7 @@ Pour voir les logs en temps réel :
 Pour fonctionner, le script à besoin d'un fichier contenant le nom des salles à réveiller (le même nom que dans les fichiers scripts des salles dans le dossier script), et l'heure de la journée en minutes à laquelle les ordinateurs de la salle doivent être réveillés (séparé par un ;).
 
 Exemple de ligne dans le fichier CSV :
-    A105;600       (Les odinateurs de la salle A105 seront allumés à 10h)
-    B304;700
+    A105;600       (Les ordinateurs de la salle A105 seront allumés à 10h)
 
 Pour cet exemple, il faut que le fichier A105.wol contenant uniquement les adresses MAC de la salle soit dans le dossier ./script/       
 
