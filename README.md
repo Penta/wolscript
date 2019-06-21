@@ -1,7 +1,7 @@
 # wolscript
 Script Shell permettant de gérer et de réveiller des groupements d'ordinateurs en toute facilité. 
 
-Ce script permet de reveiller une salle en se baseant sur le contenu du fichier wakeup.csv (par defaut) et sur la technologie Wake on LAN.
+Ce script permet de réveiller une salle en se baseant sur le contenu du fichier wakeup.csv (par defaut) et sur la technologie Wake on LAN.
 
 Installez ce script dans le dossier /wol/ (ou alors changez l'emplacement dans les paramètres plus bas dans ce fichier.
 
@@ -16,6 +16,9 @@ Pour installer wakeonlan :
 Ou via wget (plus à jour et compatible avec les autres distribution) :
     wget https://raw.githubusercontent.com/jpoliv/wakeonlan/master/wakeonlan
 (Vous devez mettre l'exécutable dans le même répertoire que le script)
+
+Si la commande nslookup n'est pas présent sur votre machine, vous pouvez aussi installer le paquet dnsutils via la commande suivante pour pouvoir récuperer l'adresse MAC d'une machine à partir de son nom de domaine :
+    apt-get install dnsutils
 
 Le script peut reconnaitre automatiquement les adresses MAC separée soit par un double-points, soit par un tiret (celui sera transformé en double-points pour le traitement via wakeonlan).
 
@@ -47,4 +50,4 @@ Exemple de ligne dans le fichier CSV :
 
 Pour cet exemple, il faut que le fichier A105.wol contenant uniquement les adresses MAC de la salle soit dans le dossier ./script/       
 
-### Par Andy Esnard - Décembre 2017
+### Par Andy Esnard - Juin 2019
