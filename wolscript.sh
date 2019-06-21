@@ -22,9 +22,6 @@
 #  https://raw.githubusercontent.com/jpoliv/wakeonlan/master/wakeonlan         #
 # (Vous devez mettre l'exécutable dans le même répertoire que le script)       #
 #                                                                              #
-# Pour les dépendances du script PHP :                                         #
-#  - apt-get install php5 php-mysql mysql-client                               #
-#                                                                              #
 # Le script peut reconnaitre automatiquement les adresses MAC separée soit     #
 # par un double-points, soit par un tiret (celui sera transformé en            #
 # double-points pour le traitement via wakeonlan).                             #
@@ -60,7 +57,7 @@
 # ordinateurs de la salle doivent être réveillés (séparé par un ;).            #
 #                                                                              #
 # Exemple de ligne dans le fichier CSV :                                       #
-#  A105;600       (Les odinateurs de la salle A105 seront allumés à 10h)       #
+#  A105;600       (Les ordinateurs de la salle A105 seront allumés à 10h)      #
 #                                                                              #
 # Pour cet exemple, il faut que le fichier A105.wol contenant uniquement les   #
 # adresses MAC de la salle soit dans le dossier ./script/                      #
